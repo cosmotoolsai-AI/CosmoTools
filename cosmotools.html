@@ -69,7 +69,6 @@ nav {
 }
 
 .nav-right { display: flex; align-items: center; gap: 12px; }
-
 .nav-price { font-size: 13px; color: var(--muted2); }
 
 .nav-cta {
@@ -206,7 +205,6 @@ h1 .highlight {
 
 .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-/* PRICING SECTION */
 .pricing-section {
   max-width: 900px;
   margin: 0 auto;
@@ -301,12 +299,7 @@ h1 .highlight {
 }
 
 .plan-period { color: var(--muted2); font-size: 14px; }
-
-.plan-permonth {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 20px;
-}
+.plan-permonth { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
 
 .plan-features {
   list-style: none;
@@ -331,12 +324,7 @@ h1 .highlight {
   flex-shrink: 0;
 }
 
-.plan-saving {
-  font-size: 12px;
-  color: var(--success);
-  font-weight: 600;
-  margin-bottom: 20px;
-}
+.plan-saving { font-size: 12px; color: var(--success); font-weight: 600; margin-bottom: 20px; }
 
 .plan-btn {
   width: 100%;
@@ -357,7 +345,6 @@ h1 .highlight {
 
 .pricing-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
 
-/* TOOLS SECTION */
 .tools-section {
   max-width: 1060px;
   margin: 0 auto;
@@ -442,7 +429,6 @@ h1 .highlight {
 .tool-card-desc { font-size: 12px; color: var(--muted2); line-height: 1.5; }
 .tool-card .lock-badge { position: absolute; top: 14px; right: 14px; font-size: 13px; opacity: 0.4; }
 
-/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -464,7 +450,6 @@ h1 .highlight {
   max-width: 560px;
   max-height: 90vh;
   overflow-y: auto;
-  position: relative;
 }
 
 .modal-header {
@@ -567,7 +552,6 @@ select option { background: var(--surface2); }
 }
 .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-/* PAYWALL MODAL */
 .paywall-modal {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -635,7 +619,6 @@ select option { background: var(--surface2); }
 
 .paywall-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
 .paywall-unlock { font-size: 13px; color: var(--muted2); margin-bottom: 10px; }
-
 .paywall-pw-row { display: flex; gap: 8px; }
 .paywall-pw-row input { flex: 1; padding: 9px 12px; font-size: 13px; }
 
@@ -724,20 +707,15 @@ footer {
   <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Uses</span></div>
 </div>
 
-<!-- PRICING -->
 <div class="pricing-section">
   <div class="section-eyebrow">Pricing</div>
   <div class="section-title">Simple, affordable plans</div>
   <p class="section-sub">All plans include full access to every tool. No limits.</p>
 
   <div class="pricing-grid">
-    <!-- Monthly -->
     <div class="pricing-card">
       <div class="plan-name">Monthly</div>
-      <div class="plan-price">
-        <span class="plan-amount">$4.99</span>
-        <span class="plan-period">/ mo</span>
-      </div>
+      <div class="plan-price"><span class="plan-amount">$4.99</span><span class="plan-period">/ mo</span></div>
       <div class="plan-permonth">Billed monthly</div>
       <ul class="plan-features">
         <li>All 24 AI tools</li>
@@ -747,13 +725,10 @@ footer {
       <button class="plan-btn secondary" onclick="window.open('https://cosmotools.gumroad.com/l/tfyjnl','_blank')">Get Monthly →</button>
     </div>
 
-    <!-- 6 Months -->
     <div class="pricing-card featured">
       <div class="featured-badge">⭐ Most Popular</div>
       <div class="plan-name">6 Months</div>
-      <div class="plan-price">
-        <span class="plan-amount">$12.99</span>
-      </div>
+      <div class="plan-price"><span class="plan-amount">$12.99</span></div>
       <div class="plan-permonth">$2.17 / month · one-time payment</div>
       <div class="plan-saving">Save 57% vs monthly</div>
       <ul class="plan-features">
@@ -764,12 +739,9 @@ footer {
       <button class="plan-btn primary" onclick="window.open('https://cosmotools.gumroad.com/l/pkawh','_blank')">Get 6 Months →</button>
     </div>
 
-    <!-- Annual -->
     <div class="pricing-card">
       <div class="plan-name">Annual</div>
-      <div class="plan-price">
-        <span class="plan-amount">$24.99</span>
-      </div>
+      <div class="plan-price"><span class="plan-amount">$24.99</span></div>
       <div class="plan-permonth">$2.08 / month · one-time payment</div>
       <div class="plan-saving">Save 58% vs monthly</div>
       <ul class="plan-features">
@@ -783,7 +755,6 @@ footer {
   <p class="pricing-note">Already subscribed? <span style="color:var(--accent2);cursor:pointer" onclick="showPaywall()">Click here to unlock your tools →</span></p>
 </div>
 
-<!-- TOOLS -->
 <div class="tools-section">
   <div class="section-header">
     <div class="section-eyebrow">All Tools</div>
@@ -867,39 +838,26 @@ footer {
     <span class="paywall-icon">🪐</span>
     <div class="paywall-title">Unlock All 24 Tools</div>
     <p class="paywall-sub">Pick a plan and get instant access to every CosmoTools AI tool.</p>
-
     <div class="paywall-plans">
       <a class="paywall-plan" href="https://cosmotools.gumroad.com/l/tfyjnl" target="_blank">
-        <div class="paywall-plan-left">
-          <div class="paywall-plan-name">Monthly</div>
-        </div>
-        <div class="paywall-plan-right">
-          <div class="paywall-plan-price">$4.99</div>
-          <div class="paywall-plan-per">per month</div>
-        </div>
+        <div class="paywall-plan-left"><div class="paywall-plan-name">Monthly</div></div>
+        <div class="paywall-plan-right"><div class="paywall-plan-price">$4.99</div><div class="paywall-plan-per">per month</div></div>
       </a>
       <a class="paywall-plan best" href="https://cosmotools.gumroad.com/l/pkawh" target="_blank">
         <div class="paywall-plan-left">
           <div class="paywall-plan-name">6 Months <span class="paywall-best-badge">BEST VALUE</span></div>
           <div class="paywall-plan-save">Save 57%</div>
         </div>
-        <div class="paywall-plan-right">
-          <div class="paywall-plan-price">$12.99</div>
-          <div class="paywall-plan-per">$2.17 / mo</div>
-        </div>
+        <div class="paywall-plan-right"><div class="paywall-plan-price">$12.99</div><div class="paywall-plan-per">$2.17 / mo</div></div>
       </a>
       <a class="paywall-plan" href="https://cosmotools.gumroad.com/l/qkgoew" target="_blank">
         <div class="paywall-plan-left">
           <div class="paywall-plan-name">Annual</div>
           <div class="paywall-plan-save">Save 58%</div>
         </div>
-        <div class="paywall-plan-right">
-          <div class="paywall-plan-price">$24.99</div>
-          <div class="paywall-plan-per">$2.08 / mo</div>
-        </div>
+        <div class="paywall-plan-right"><div class="paywall-plan-price">$24.99</div><div class="paywall-plan-per">$2.08 / mo</div></div>
       </a>
     </div>
-
     <hr class="paywall-divider">
     <p class="paywall-unlock">Already subscribed? Enter your password to unlock.</p>
     <div class="paywall-pw-row">
@@ -1115,7 +1073,7 @@ const TOOLS = {
     fields: [
       {id:"project", label:"Project or work area", type:"input", placeholder:"e.g. Website redesign"},
       {id:"progress", label:"Progress this period", type:"textarea", placeholder:"e.g. Completed wireframes, got design approval..."},
-      {id:"next", label:"What's next / blockers", type:"textarea", placeholder:"e.g. Starting testing next week, blocked on API access..."}
+      {id:"next", label:"What's next / blockers", type:"textarea", placeholder:"e.g. Starting testing next week..."}
     ],
     prompt: (f) => `Write a concise status update for ${f.project}. Progress: ${f.progress}. Next/blockers: ${f.next}. Format: Progress, Next Steps, Blockers. Brief and clear.`
   },
@@ -1253,29 +1211,33 @@ async function runTool() {
   const btn = document.getElementById('modal-btn');
   const output = document.getElementById('modal-output');
   const outbox = document.getElementById('modal-outbox');
+
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner"></div> Generating...';
   output.classList.add('visible');
   outbox.classList.add('loading');
   outbox.textContent = 'Writing your content...';
+
   try {
-    const res = await fetch('/.netlify/functions/gemini', {
+    const res = await fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
+      body: JSON.stringify({ prompt })
     });
+
     const data = await res.json();
-const text = data.text || "Something went wrong. Please try again.";
+
+    if (!res.ok) {
+      throw new Error(data.error || 'Something went wrong.');
+    }
+
     outbox.classList.remove('loading');
-    outbox.textContent = text;
+    outbox.textContent = data.text;
   } catch (err) {
     outbox.classList.remove('loading');
     outbox.textContent = 'Error connecting. Please try again.';
   }
+
   btn.disabled = false;
   btn.textContent = 'Generate Again';
 }
