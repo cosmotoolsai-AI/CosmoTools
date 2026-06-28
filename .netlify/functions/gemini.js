@@ -25,9 +25,23 @@ exports.handler = async (event) => {
 
     const data = await response.json();
 
-    const text =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from Gemini.";
+console.log(JSON.stringify(data, null, 2));
+
+if (data.error) {
+  return {
+    statusCode: 500,
+    body: JSON.stringify(data),
+  };
+}
+
+const text =
+  data.candidates?.[0]?.content?.parts?.[0]?.text ||
+  "No response from Gemini.";
+
+return {
+  statusCode: 200,
+  body: JSON.stringify({ text }),
+};
 
     return {
       statusCode: 200,
