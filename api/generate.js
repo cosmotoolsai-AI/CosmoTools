@@ -1,6 +1,5 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
-
   try {
     const { prompt } = req.body;
 
@@ -17,14 +16,15 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
+    // Return everything so we can see what Gemini is saying
     if (!response.ok) {
-      return res.status(response.status).json({ error: data.error?.message || 'Gemini error' });
+      return res.status(200).json({ text: 'Gemini error: ' + JSON.stringify(data) });
     }
 
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response from Gemini.';
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response: ' + JSON.stringify(data);
     res.status(200).json({ text });
 
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(200).json({ text: 'Caught error: ' + err.message });
   }
 }
