@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CosmoTools — AI tools for people who work</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #07080f;
+  --surface: #0f1018;
+  --surface2: #181920;
+  --border: #23242f;
+  --accent: #5b6ef5;
+  --accent2: #8b9bf8;
+  --accent3: #c7ceff;
+  --text: #eeeef5;
+  --muted: #5c5d72;
+  --muted2: #8889a0;
+  --success: #4ade80;
+  --cat1: #5b6ef5;
+  --cat2: #e0635a;
+  --cat3: #4ec99e;
+  --cat4: #e09a3a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(7,8,15,0.92);
+  backdrop-filter: blur(16px);
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+
+.nav-right { display: flex; align-items: center; gap: 12px; }
+
+.nav-price { font-size: 13px; color: var(--muted2); }
+
+.nav-cta {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.nav-cta:hover { background: #4a5de0; }
+
+.hero {
+  text-align: center;
+  padding: 90px 40px 70px;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(91,110,245,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 24px;
+  background: rgba(91,110,245,0.1);
+  border: 1px solid rgba(91,110,245,0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(38px, 6vw, 62px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+  margin-bottom: 22px;
+}
+
+h1 .highlight {
+  background: linear-gradient(135deg, var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  color: var(--muted2);
+  font-size: 17px;
+  font-weight: 300;
+  max-width: 500px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-primary:hover { background: #4a5de0; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--muted2);
+  border: 1px solid var(--border);
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+.hero-note { margin-top: 16px; font-size: 12px; color: var(--muted); }
+
+.stats {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+}
+
+.stat {
+  padding: 24px 48px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent2);
+  display: block;
+}
+
+.stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* PRICING SECTION */
+.pricing-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px 20px;
+  text-align: center;
+}
+
+.pricing-section .section-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.pricing-section .section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.pricing-section .section-sub {
+  color: var(--muted2);
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pricing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: left;
+  position: relative;
+  transition: all 0.18s;
+}
+
+.pricing-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.pricing-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(91,110,245,0.08), rgba(139,155,248,0.04));
+}
+
+.featured-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.plan-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.plan-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.plan-period { color: var(--muted2); font-size: 14px; }
+
+.plan-permonth {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.plan-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.plan-features li {
+  font-size: 13px;
+  color: var(--muted2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plan-features li::before {
+  content: '✓';
+  color: var(--success);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.plan-saving {
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.plan-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  border: none;
+}
+
+.plan-btn.primary { background: var(--accent); color: white; }
+.plan-btn.primary:hover { background: #4a5de0; }
+.plan-btn.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+.plan-btn.secondary:hover { border-color: var(--accent); }
+
+.pricing-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+/* TOOLS SECTION */
+.tools-section {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+.section-header { margin-bottom: 36px; }
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.category { margin-bottom: 52px; }
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.cat-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+
+.cat-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--surface2);
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.tool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(91,110,245,0.12);
+}
+
+.tool-card-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+.tool-card-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 5px; color: var(--text); }
+.tool-card-desc { font-size: 12px; color: var(--muted2); line-height: 1.5; }
+.tool-card .lock-badge { position: absolute; top: 14px; right: 14px; font-size: 13px; opacity: 0.4; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-header {
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
+.modal-desc { font-size: 13px; color: var(--muted2); margin-top: 4px; }
+
+.modal-close {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted2);
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.modal-body { padding: 24px 28px; }
+.fields { display: grid; gap: 14px; margin-bottom: 18px; }
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+
+label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+input, textarea, select {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 11px 13px;
+  width: 100%;
+  transition: border-color 0.18s;
+  outline: none;
+  resize: vertical;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+select option { background: var(--surface2); }
+
+.generate-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.generate-btn:hover { background: #4a5de0; }
+.generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.output-area { margin-top: 18px; display: none; }
+.output-area.visible { display: block; }
+.output-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+.output-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text);
+  white-space: pre-wrap;
+  min-height: 100px;
+}
+.output-box.loading { color: var(--muted); font-style: italic; }
+
+.copy-btn {
+  margin-top: 10px;
+  padding: 7px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--muted2);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.18s;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* PAYWALL MODAL */
+.paywall-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  padding: 36px;
+  text-align: center;
+}
+
+.paywall-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+
+.paywall-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.paywall-sub { color: var(--muted2); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+
+.paywall-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.paywall-plan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.paywall-plan:hover { border-color: var(--accent); }
+.paywall-plan.best { border-color: var(--accent); background: rgba(91,110,245,0.08); }
+
+.paywall-plan-left { text-align: left; }
+.paywall-plan-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+.paywall-plan-save { font-size: 11px; color: var(--success); font-weight: 600; margin-top: 2px; }
+
+.paywall-plan-right { text-align: right; }
+.paywall-plan-price { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--accent2); }
+.paywall-plan-per { font-size: 11px; color: var(--muted); }
+
+.paywall-best-badge {
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.paywall-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+.paywall-unlock { font-size: 13px; color: var(--muted2); margin-bottom: 10px; }
+
+.paywall-pw-row { display: flex; gap: 8px; }
+.paywall-pw-row input { flex: 1; padding: 9px 12px; font-size: 13px; }
+
+.paywall-pw-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  transition: all 0.18s;
+}
+.paywall-pw-btn:hover { border-color: var(--accent); }
+
+.paywall-error { color: #f87171; font-size: 12px; margin-top: 8px; display: none; }
+.paywall-note { font-size: 11px; color: var(--muted); margin-top: 16px; }
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 15px; height: 15px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@media (max-width: 640px) {
+  nav { padding: 14px 18px; }
+  .nav-price { display: none; }
+  .hero { padding: 60px 20px 50px; }
+  .stats { flex-wrap: wrap; }
+  .stat { padding: 18px 24px; flex: 1; min-width: 140px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .tools-section { padding: 40px 16px 60px; }
+  .tool-grid { grid-template-columns: 1fr 1fr; }
+  footer { padding: 20px 18px; flex-direction: column; text-align: center; }
+  .modal-header, .modal-body { padding: 20px; }
+  .paywall-modal { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">🪐</div>
+    CosmoTools
+  </div>
+  <div class="nav-right">
+    <span class="nav-price">From $4.99 / month</span>
+    <button class="nav-cta" onclick="showPaywall()">Get Access</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="eyebrow">✦ 24 AI tools · one subscription</div>
+  <h1>Work smarter.<br><span class="highlight">Write faster.</span></h1>
+  <p class="hero-sub">Every workplace writing task you hate — emails, reviews, proposals, cover letters — done in seconds with AI.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="showPaywall()">Get Access — from $4.99</button>
+    <button class="btn-secondary" onclick="document.querySelector('.tools-section').scrollIntoView({behavior:'smooth'})">See all 24 tools ↓</button>
+  </div>
+  <p class="hero-note">Cancel anytime · No card needed to browse</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><span class="stat-num">24</span><span class="stat-label">AI Tools</span></div>
+  <div class="stat"><span class="stat-num">$4.99</span><span class="stat-label">Starting Price</span></div>
+  <div class="stat"><span class="stat-num">&lt;30s</span><span class="stat-label">Per Task</span></div>
+  <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Uses</span></div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section">
+  <div class="section-eyebrow">Pricing</div>
+  <div class="section-title">Simple, affordable plans</div>
+  <p class="section-sub">All plans include full access to every tool. No limits.</p>
+
+  <div class="pricing-grid">
+    <!-- Monthly -->
+    <div class="pricing-card">
+      <div class="plan-name">Monthly</div>
+      <div class="plan-price">
+        <span class="plan-amount">$4.99</span>
+        <span class="plan-period">/ mo</span>
+      </div>
+      <div class="plan-permonth">Billed monthly</div>
+      <ul class="plan-features">
+        <li>All 24 AI tools</li>
+        <li>Unlimited uses</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <button class="plan-btn secondary" onclick="window.open('https://cosmotools.gumroad.com/l/tfyjnl','_blank')">Get Monthly →</button>
+    </div>
+
+    <!-- 6 Months -->
+    <div class="pricing-card featured">
+      <div class="featured-badge">⭐ Most Popular</div>
+      <div class="plan-name">6 Months</div>
+      <div class="plan-price">
+        <span class="plan-amount">$12.99</span>
+      </div>
+      <div class="plan-permonth">$2.17 / month · one-time payment</div>
+      <div class="plan-saving">Save 57% vs monthly</div>
+      <ul class="plan-features">
+        <li>All 24 AI tools</li>
+        <li>Unlimited uses</li>
+        <li>6 months access</li>
+      </ul>
+      <button class="plan-btn primary" onclick="window.open('https://cosmotools.gumroad.com/l/pkawh','_blank')">Get 6 Months →</button>
+    </div>
+
+    <!-- Annual -->
+    <div class="pricing-card">
+      <div class="plan-name">Annual</div>
+      <div class="plan-price">
+        <span class="plan-amount">$24.99</span>
+      </div>
+      <div class="plan-permonth">$2.08 / month · one-time payment</div>
+      <div class="plan-saving">Save 58% vs monthly</div>
+      <ul class="plan-features">
+        <li>All 24 AI tools</li>
+        <li>Unlimited uses</li>
+        <li>Full year access</li>
+      </ul>
+      <button class="plan-btn secondary" onclick="window.open('https://cosmotools.gumroad.com/l/qkgoew','_blank')">Get Annual →</button>
+    </div>
+  </div>
+  <p class="pricing-note">Already subscribed? <span style="color:var(--accent2);cursor:pointer" onclick="showPaywall()">Click here to unlock your tools →</span></p>
+</div>
+
+<!-- TOOLS -->
+<div class="tools-section">
+  <div class="section-header">
+    <div class="section-eyebrow">All Tools</div>
+    <div class="section-title">Everything you need at work</div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--cat1)"></div>
+      <div class="cat-name">Writing & Communication</div>
+      <div class="cat-count">8 tools</div>
+    </div>
+    <div class="tool-grid">
+      <div class="tool-card" onclick="openTool('email')"><span class="tool-card-icon">✉️</span><div class="tool-card-name">Professional Email Writer</div><div class="tool-card-desc">Write clear, polished emails for any work situation.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('cover')"><span class="tool-card-icon">📄</span><div class="tool-card-name">Cover Letter Writer</div><div class="tool-card-desc">Tailored cover letters that get you interviews.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('linkedin')"><span class="tool-card-icon">💼</span><div class="tool-card-name">LinkedIn Bio & Headline</div><div class="tool-card-desc">Stand out with a sharp professional profile.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('cold')"><span class="tool-card-icon">🎯</span><div class="tool-card-name">Cold Outreach Email</div><div class="tool-card-desc">Outreach emails that actually get replies.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('apology')"><span class="tool-card-icon">🤝</span><div class="tool-card-name">Apology / Difficult Email</div><div class="tool-card-desc">Handle tough conversations with the right words.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('followup')"><span class="tool-card-icon">🔁</span><div class="tool-card-name">Follow Up Email</div><div class="tool-card-desc">Timely, professional follow-ups that get responses.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('resignation')"><span class="tool-card-icon">👋</span><div class="tool-card-name">Resignation Letter</div><div class="tool-card-desc">Leave gracefully with a professional letter.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('reference')"><span class="tool-card-icon">📨</span><div class="tool-card-name">Reference Request Email</div><div class="tool-card-desc">Ask for references without the awkwardness.</div><span class="lock-badge">🔒</span></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--cat2)"></div>
+      <div class="cat-name">Career & Growth</div>
+      <div class="cat-count">6 tools</div>
+    </div>
+    <div class="tool-grid">
+      <div class="tool-card" onclick="openTool('review')"><span class="tool-card-icon">⭐</span><div class="tool-card-name">Performance Review Writer</div><div class="tool-card-desc">Write self-reviews that highlight your impact.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('selfeval')"><span class="tool-card-icon">📊</span><div class="tool-card-name">Self Evaluation Writer</div><div class="tool-card-desc">Articulate your achievements and growth clearly.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('promotion')"><span class="tool-card-icon">🚀</span><div class="tool-card-name">Promotion Request Letter</div><div class="tool-card-desc">Make a compelling case for your next step up.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('salary')"><span class="tool-card-icon">💰</span><div class="tool-card-name">Salary Negotiation Script</div><div class="tool-card-desc">Negotiate your salary with confidence.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('interview')"><span class="tool-card-icon">🎤</span><div class="tool-card-name">Interview Prep</div><div class="tool-card-desc">Get tailored Q&As for your next interview.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('resume')"><span class="tool-card-icon">📝</span><div class="tool-card-name">Resume Bullet Points</div><div class="tool-card-desc">Turn your experience into powerful resume bullets.</div><span class="lock-badge">🔒</span></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--cat3)"></div>
+      <div class="cat-name">Meetings & Productivity</div>
+      <div class="cat-count">5 tools</div>
+    </div>
+    <div class="tool-grid">
+      <div class="tool-card" onclick="openTool('agenda')"><span class="tool-card-icon">📅</span><div class="tool-card-name">Meeting Agenda Generator</div><div class="tool-card-desc">Run focused, productive meetings every time.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('summary')"><span class="tool-card-icon">📋</span><div class="tool-card-name">Meeting Summary Writer</div><div class="tool-card-desc">Turn messy notes into clear meeting summaries.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('proposal')"><span class="tool-card-icon">📦</span><div class="tool-card-name">Project Proposal Writer</div><div class="tool-card-desc">Pitch projects with a clear, compelling proposal.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('status')"><span class="tool-card-icon">📡</span><div class="tool-card-name">Status Update Writer</div><div class="tool-card-desc">Keep stakeholders informed with clear updates.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('weekly')"><span class="tool-card-icon">🗓️</span><div class="tool-card-name">Weekly Report Generator</div><div class="tool-card-desc">Summarize your week's work professionally.</div><span class="lock-badge">🔒</span></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header">
+      <div class="cat-dot" style="background:var(--cat4)"></div>
+      <div class="cat-name">Workplace Situations</div>
+      <div class="cat-count">5 tools</div>
+    </div>
+    <div class="tool-grid">
+      <div class="tool-card" onclick="openTool('complaint')"><span class="tool-card-icon">📣</span><div class="tool-card-name">Complaint Letter Writer</div><div class="tool-card-desc">Raise issues professionally and effectively.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('client')"><span class="tool-card-icon">🤝</span><div class="tool-card-name">Client Proposal Writer</div><div class="tool-card-desc">Win clients with polished, persuasive proposals.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('offer')"><span class="tool-card-icon">📬</span><div class="tool-card-name">Job Offer Response</div><div class="tool-card-desc">Accept, decline, or negotiate a job offer well.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('feedback')"><span class="tool-card-icon">💬</span><div class="tool-card-name">Feedback Writer</div><div class="tool-card-desc">Give constructive feedback that's well received.</div><span class="lock-badge">🔒</span></div>
+      <div class="tool-card" onclick="openTool('ooo')"><span class="tool-card-icon">🏖️</span><div class="tool-card-name">Out of Office Message</div><div class="tool-card-desc">Set clear, professional out-of-office replies.</div><span class="lock-badge">🔒</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="logo" style="font-size:16px">🪐 CosmoTools</div>
+  <div>24 AI tools for working professionals</div>
+  <div>From $4.99 · Cancel anytime</div>
+</footer>
+
+<!-- PAYWALL MODAL -->
+<div class="modal-overlay" id="paywall-overlay" onclick="handleOverlayClick(event,'paywall-overlay')">
+  <div class="paywall-modal">
+    <span class="paywall-icon">🪐</span>
+    <div class="paywall-title">Unlock All 24 Tools</div>
+    <p class="paywall-sub">Pick a plan and get instant access to every CosmoTools AI tool.</p>
+
+    <div class="paywall-plans">
+      <a class="paywall-plan" href="https://cosmotools.gumroad.com/l/tfyjnl" target="_blank">
+        <div class="paywall-plan-left">
+          <div class="paywall-plan-name">Monthly</div>
+        </div>
+        <div class="paywall-plan-right">
+          <div class="paywall-plan-price">$4.99</div>
+          <div class="paywall-plan-per">per month</div>
+        </div>
+      </a>
+      <a class="paywall-plan best" href="https://cosmotools.gumroad.com/l/pkawh" target="_blank">
+        <div class="paywall-plan-left">
+          <div class="paywall-plan-name">6 Months <span class="paywall-best-badge">BEST VALUE</span></div>
+          <div class="paywall-plan-save">Save 57%</div>
+        </div>
+        <div class="paywall-plan-right">
+          <div class="paywall-plan-price">$12.99</div>
+          <div class="paywall-plan-per">$2.17 / mo</div>
+        </div>
+      </a>
+      <a class="paywall-plan" href="https://cosmotools.gumroad.com/l/qkgoew" target="_blank">
+        <div class="paywall-plan-left">
+          <div class="paywall-plan-name">Annual</div>
+          <div class="paywall-plan-save">Save 58%</div>
+        </div>
+        <div class="paywall-plan-right">
+          <div class="paywall-plan-price">$24.99</div>
+          <div class="paywall-plan-per">$2.08 / mo</div>
+        </div>
+      </a>
+    </div>
+
+    <hr class="paywall-divider">
+    <p class="paywall-unlock">Already subscribed? Enter your password to unlock.</p>
+    <div class="paywall-pw-row">
+      <input type="password" id="pw-input" placeholder="Enter your password..." onkeydown="if(event.key==='Enter')checkPassword()">
+      <button class="paywall-pw-btn" onclick="checkPassword()">Unlock</button>
+    </div>
+    <p class="paywall-error" id="pw-error">Incorrect password. Check your receipt email.</p>
+    <p class="paywall-note">Password is emailed to you after purchase via Gumroad.</p>
+  </div>
+</div>
+
+<!-- TOOL MODAL -->
+<div class="modal-overlay" id="tool-overlay" onclick="handleOverlayClick(event,'tool-overlay')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title">Tool</div>
+        <div class="modal-desc" id="modal-desc"></div>
+      </div>
+      <button class="modal-close" onclick="closeTool()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="fields" id="modal-fields"></div>
+      <button class="generate-btn" id="modal-btn" onclick="runTool()">Generate</button>
+      <div class="output-area" id="modal-output">
+        <div class="output-label">Result</div>
+        <div class="output-box" id="modal-outbox"></div>
+        <button class="copy-btn" onclick="copyModal()">Copy to clipboard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PASSWORDS = ["cosmo-24", "cosmo-25", "cosmo-26"];
+let unlocked = sessionStorage.getItem('cosmo_unlocked') === 'true';
+let currentTool = null;
+
+const TOOLS = {
+  email: {
+    title: "✉️ Professional Email Writer",
+    desc: "Write clear, polished emails for any work situation.",
+    fields: [
+      {id:"to", label:"Who is the email to?", type:"input", placeholder:"e.g. My manager, a client, HR department"},
+      {id:"purpose", label:"What's the purpose?", type:"input", placeholder:"e.g. Requesting time off, following up on a project"},
+      {id:"context", label:"Key details", type:"textarea", placeholder:"e.g. I need 3 days off next week for a family event..."},
+      {id:"tone", label:"Tone", type:"select", options:["Professional","Friendly","Formal","Direct"]}
+    ],
+    prompt: (f) => `Write a ${f.tone.toLowerCase()} professional workplace email to ${f.to}. Purpose: ${f.purpose}. Details: ${f.context}. Keep it concise and ready to send. Include a subject line.`
+  },
+  cover: {
+    title: "📄 Cover Letter Writer",
+    desc: "Tailored cover letters that get you interviews.",
+    fields: [
+      {id:"job", label:"Job title & company", type:"input", placeholder:"e.g. Software Engineer at Google"},
+      {id:"bg", label:"Your background", type:"textarea", placeholder:"e.g. 3 years in backend development..."},
+      {id:"tone", label:"Tone", type:"select", options:["Professional & confident","Warm & personable","Bold & direct"]}
+    ],
+    prompt: (f) => `Write a ${f.tone.toLowerCase()} cover letter for ${f.job}. Background: ${f.bg}. 3 short paragraphs: why this role, what they bring, call to action. Ready to send, no placeholders.`
+  },
+  linkedin: {
+    title: "💼 LinkedIn Bio & Headline",
+    desc: "Stand out with a sharp professional LinkedIn profile.",
+    fields: [
+      {id:"name", label:"Your name & role", type:"input", placeholder:"e.g. Jane — Senior Product Manager"},
+      {id:"bg", label:"Your background", type:"textarea", placeholder:"e.g. 8 years in product, led teams at Amazon..."},
+      {id:"vibe", label:"Vibe", type:"input", placeholder:"e.g. Authoritative but approachable"}
+    ],
+    prompt: (f) => `Write a LinkedIn headline and About section for ${f.name}. Background: ${f.bg}. Vibe: ${f.vibe}. Human, no buzzwords. Label each section clearly.`
+  },
+  cold: {
+    title: "🎯 Cold Outreach Email",
+    desc: "Outreach emails that actually get replies.",
+    fields: [
+      {id:"who", label:"Who you're reaching out to", type:"input", placeholder:"e.g. Head of Marketing at SaaS companies"},
+      {id:"offer", label:"What you're offering", type:"input", placeholder:"e.g. Freelance design services"},
+      {id:"goal", label:"Goal of the email", type:"input", placeholder:"e.g. Book a 20 min discovery call"}
+    ],
+    prompt: (f) => `Write a concise cold outreach email to ${f.who}. Offer: ${f.offer}. Goal: ${f.goal}. Under 120 words, no fluff, include subject line. Ready to send.`
+  },
+  apology: {
+    title: "🤝 Apology / Difficult Email",
+    desc: "Handle tough conversations with the right words.",
+    fields: [
+      {id:"situation", label:"What happened?", type:"textarea", placeholder:"e.g. I missed a deadline and it affected the team..."},
+      {id:"to", label:"Who is it to?", type:"input", placeholder:"e.g. My manager, a client"},
+      {id:"tone", label:"Tone", type:"select", options:["Sincere & professional","Direct & solution-focused","Warm & personal"]}
+    ],
+    prompt: (f) => `Write a ${f.tone.toLowerCase()} email to ${f.to} addressing: ${f.situation}. Acknowledge, take responsibility, offer solution. Include subject line.`
+  },
+  followup: {
+    title: "🔁 Follow Up Email",
+    desc: "Timely, professional follow-ups that get responses.",
+    fields: [
+      {id:"context", label:"What are you following up on?", type:"textarea", placeholder:"e.g. A job interview I had last week..."},
+      {id:"to", label:"Who to?", type:"input", placeholder:"e.g. The hiring manager"},
+      {id:"tone", label:"Tone", type:"select", options:["Polite & professional","Friendly","Direct"]}
+    ],
+    prompt: (f) => `Write a ${f.tone.toLowerCase()} follow-up email to ${f.to} about: ${f.context}. Short, professional, clear next step. Include subject line.`
+  },
+  resignation: {
+    title: "👋 Resignation Letter",
+    desc: "Leave gracefully with a professional resignation letter.",
+    fields: [
+      {id:"role", label:"Your role & company", type:"input", placeholder:"e.g. Marketing Manager at Acme Corp"},
+      {id:"last", label:"Last working day", type:"input", placeholder:"e.g. Friday 18th July 2025"},
+      {id:"reason", label:"Reason (optional)", type:"input", placeholder:"e.g. Pursuing a new opportunity"}
+    ],
+    prompt: (f) => `Write a professional resignation letter from ${f.role}. Last day: ${f.last}. Reason: ${f.reason || "keep vague and positive"}. Gracious, brief, professional.`
+  },
+  reference: {
+    title: "📨 Reference Request Email",
+    desc: "Ask for references without the awkwardness.",
+    fields: [
+      {id:"from", label:"Who you're asking", type:"input", placeholder:"e.g. My former manager Sarah"},
+      {id:"for", label:"What it's for", type:"input", placeholder:"e.g. A job application at a tech company"},
+      {id:"context", label:"Your relationship", type:"textarea", placeholder:"e.g. She managed me for 2 years at XYZ..."}
+    ],
+    prompt: (f) => `Write a friendly professional email asking ${f.from} for a reference for: ${f.for}. Relationship: ${f.context}. Warm, brief, easy to say yes to. Include subject line.`
+  },
+  review: {
+    title: "⭐ Performance Review Writer",
+    desc: "Write self-reviews that highlight your real impact.",
+    fields: [
+      {id:"role", label:"Your role", type:"input", placeholder:"e.g. Sales Executive"},
+      {id:"achievements", label:"Key achievements this period", type:"textarea", placeholder:"e.g. Exceeded sales target by 20%..."},
+      {id:"goals", label:"Goals for next period (optional)", type:"textarea", placeholder:"e.g. Lead a team, expand into new markets..."}
+    ],
+    prompt: (f) => `Write a professional self-performance review for a ${f.role}. Achievements: ${f.achievements}. Next goals: ${f.goals || "not specified"}. Confident, specific, results-focused.`
+  },
+  selfeval: {
+    title: "📊 Self Evaluation Writer",
+    desc: "Articulate your achievements and growth clearly.",
+    fields: [
+      {id:"role", label:"Your role", type:"input", placeholder:"e.g. UX Designer"},
+      {id:"strengths", label:"Your strengths this year", type:"textarea", placeholder:"e.g. Delivered 5 product redesigns..."},
+      {id:"growth", label:"Areas you've grown in", type:"textarea", placeholder:"e.g. Learned new prototyping tools..."}
+    ],
+    prompt: (f) => `Write a self-evaluation for a ${f.role}. Strengths: ${f.strengths}. Growth: ${f.growth}. First person, professional, honest, impact-focused.`
+  },
+  promotion: {
+    title: "🚀 Promotion Request Letter",
+    desc: "Make a compelling case for your next step up.",
+    fields: [
+      {id:"role", label:"Current & desired role", type:"input", placeholder:"e.g. Junior Developer → Senior Developer"},
+      {id:"achievements", label:"Why you deserve it", type:"textarea", placeholder:"e.g. Led 3 major projects, mentored 2 junior devs..."},
+      {id:"to", label:"Who you're sending it to", type:"input", placeholder:"e.g. My line manager, HR"}
+    ],
+    prompt: (f) => `Write a professional promotion request letter seeking to go from ${f.role}. To: ${f.to}. Justification: ${f.achievements}. Confident, evidence-based. Include subject line.`
+  },
+  salary: {
+    title: "💰 Salary Negotiation Script",
+    desc: "Negotiate your salary with confidence.",
+    fields: [
+      {id:"current", label:"Current or offered salary", type:"input", placeholder:"e.g. $60,000 or 'offered $70,000'"},
+      {id:"target", label:"Target salary", type:"input", placeholder:"e.g. $80,000"},
+      {id:"reasons", label:"Why you deserve it", type:"textarea", placeholder:"e.g. 5 years experience, led major projects..."}
+    ],
+    prompt: (f) => `Write a salary negotiation script. Current/offered: ${f.current}. Target: ${f.target}. Justification: ${f.reasons}. Professional, confident. Include email version and key talking points.`
+  },
+  interview: {
+    title: "🎤 Interview Prep",
+    desc: "Get tailored Q&As to ace your next interview.",
+    fields: [
+      {id:"role", label:"Role you're interviewing for", type:"input", placeholder:"e.g. Product Manager at a fintech startup"},
+      {id:"bg", label:"Your background", type:"textarea", placeholder:"e.g. 4 years in product at e-commerce companies..."},
+      {id:"type", label:"Interview type", type:"select", options:["General / HR","Technical","Behavioural (STAR)","Leadership","All of the above"]}
+    ],
+    prompt: (f) => `Generate 8 likely interview questions and strong answers for a ${f.role} ${f.type} interview. Background: ${f.bg}. Format as Q: then A: Make answers specific and impressive.`
+  },
+  resume: {
+    title: "📝 Resume Bullet Points",
+    desc: "Turn your experience into powerful resume bullets.",
+    fields: [
+      {id:"role", label:"Role / job title", type:"input", placeholder:"e.g. Marketing Manager"},
+      {id:"tasks", label:"What you actually did", type:"textarea", placeholder:"e.g. Ran social media, managed a team of 4..."},
+      {id:"results", label:"Results / achievements", type:"textarea", placeholder:"e.g. Grew Instagram by 40%..."}
+    ],
+    prompt: (f) => `Write 6 powerful resume bullet points for a ${f.role}. Tasks: ${f.tasks}. Results: ${f.results || "write strong action-focused bullets"}. Start each with a strong action verb, quantify where possible.`
+  },
+  agenda: {
+    title: "📅 Meeting Agenda Generator",
+    desc: "Run focused, productive meetings every time.",
+    fields: [
+      {id:"purpose", label:"Meeting purpose", type:"input", placeholder:"e.g. Quarterly planning, project kickoff"},
+      {id:"attendees", label:"Who's attending", type:"input", placeholder:"e.g. Product team of 6"},
+      {id:"duration", label:"Meeting duration", type:"input", placeholder:"e.g. 60 minutes"}
+    ],
+    prompt: (f) => `Create a meeting agenda for a ${f.duration} ${f.purpose} meeting with ${f.attendees}. Include time slots, objective, and space for action items. Structured and ready to use.`
+  },
+  summary: {
+    title: "📋 Meeting Summary Writer",
+    desc: "Turn messy notes into clear meeting summaries.",
+    fields: [
+      {id:"notes", label:"Paste your meeting notes", type:"textarea", placeholder:"e.g. John - update on Q3, Sarah said deadline moved..."},
+      {id:"attendees", label:"Attendees", type:"input", placeholder:"e.g. John, Sarah, Mike"}
+    ],
+    prompt: (f) => `Turn these notes into a professional meeting summary. Attendees: ${f.attendees}. Notes: ${f.notes}. Format: Summary, Key Decisions, Action Items, Next Steps.`
+  },
+  proposal: {
+    title: "📦 Project Proposal Writer",
+    desc: "Pitch projects with a clear, compelling proposal.",
+    fields: [
+      {id:"project", label:"Project name & idea", type:"input", placeholder:"e.g. New customer loyalty program"},
+      {id:"details", label:"Key details", type:"textarea", placeholder:"e.g. 3 month project, team of 4, budget $20k..."},
+      {id:"audience", label:"Who's reading it", type:"input", placeholder:"e.g. Senior management"}
+    ],
+    prompt: (f) => `Write a project proposal for ${f.project} aimed at ${f.audience}. Details: ${f.details}. Include: Executive Summary, Problem, Solution, Timeline, Budget, Expected outcomes.`
+  },
+  status: {
+    title: "📡 Status Update Writer",
+    desc: "Keep stakeholders informed with clear updates.",
+    fields: [
+      {id:"project", label:"Project or work area", type:"input", placeholder:"e.g. Website redesign"},
+      {id:"progress", label:"Progress this period", type:"textarea", placeholder:"e.g. Completed wireframes, got design approval..."},
+      {id:"next", label:"What's next / blockers", type:"textarea", placeholder:"e.g. Starting testing next week, blocked on API access..."}
+    ],
+    prompt: (f) => `Write a concise status update for ${f.project}. Progress: ${f.progress}. Next/blockers: ${f.next}. Format: Progress, Next Steps, Blockers. Brief and clear.`
+  },
+  weekly: {
+    title: "🗓️ Weekly Report Generator",
+    desc: "Summarize your week's work professionally.",
+    fields: [
+      {id:"role", label:"Your role", type:"input", placeholder:"e.g. Account Manager"},
+      {id:"done", label:"What you accomplished this week", type:"textarea", placeholder:"e.g. Closed 2 deals, attended 5 client calls..."},
+      {id:"next", label:"Plan for next week", type:"textarea", placeholder:"e.g. Follow up with 3 prospects..."}
+    ],
+    prompt: (f) => `Write a professional weekly work report for a ${f.role}. This week: ${f.done}. Next week: ${f.next}. Format: This Week's Highlights, Upcoming, Notes. Concise and professional.`
+  },
+  complaint: {
+    title: "📣 Complaint Letter Writer",
+    desc: "Raise issues professionally and effectively.",
+    fields: [
+      {id:"issue", label:"What's the complaint about?", type:"textarea", placeholder:"e.g. A colleague's repeated unprofessional behaviour..."},
+      {id:"to", label:"Who it's addressed to", type:"input", placeholder:"e.g. HR department, line manager"},
+      {id:"outcome", label:"Desired outcome", type:"input", placeholder:"e.g. Formal warning, mediation"}
+    ],
+    prompt: (f) => `Write a formal complaint letter to ${f.to} about: ${f.issue}. Desired outcome: ${f.outcome}. Factual, professional, non-emotional. Include subject line.`
+  },
+  client: {
+    title: "🤝 Client Proposal Writer",
+    desc: "Win clients with polished, persuasive proposals.",
+    fields: [
+      {id:"service", label:"Your service", type:"input", placeholder:"e.g. Social media management"},
+      {id:"client", label:"The client & their need", type:"textarea", placeholder:"e.g. A restaurant that wants to grow their Instagram..."},
+      {id:"price", label:"Pricing (optional)", type:"input", placeholder:"e.g. $500/month"}
+    ],
+    prompt: (f) => `Write a client proposal for ${f.service}. Client: ${f.client}. Pricing: ${f.price || "not specified"}. Include: Introduction, Their Need, What You'll Do, Outcomes, Pricing, CTA.`
+  },
+  offer: {
+    title: "📬 Job Offer Response",
+    desc: "Accept, decline, or negotiate a job offer professionally.",
+    fields: [
+      {id:"offer", label:"The offer details", type:"input", placeholder:"e.g. $75,000 salary, Senior Developer at TechCorp"},
+      {id:"response", label:"Your response type", type:"select", options:["Accept enthusiastically","Decline politely","Negotiate salary","Request more time to decide"]},
+      {id:"context", label:"Any extra context", type:"textarea", placeholder:"e.g. I want to negotiate to $85k..."}
+    ],
+    prompt: (f) => `Write a professional email to ${f.response.toLowerCase()} a job offer. Offer: ${f.offer}. Context: ${f.context || "none"}. Gracious, professional, clear. Include subject line.`
+  },
+  feedback: {
+    title: "💬 Feedback Writer",
+    desc: "Give constructive feedback that lands well.",
+    fields: [
+      {id:"who", label:"Who the feedback is for", type:"input", placeholder:"e.g. A junior colleague"},
+      {id:"situation", label:"What's the feedback about?", type:"textarea", placeholder:"e.g. They keep missing deadlines..."},
+      {id:"tone", label:"Tone", type:"select", options:["Constructive & supportive","Direct & honest","Formal"]}
+    ],
+    prompt: (f) => `Write ${f.tone.toLowerCase()} feedback for ${f.who} about: ${f.situation}. Use situation-behaviour-impact model. Actionable, specific, professional.`
+  },
+  ooo: {
+    title: "🏖️ Out of Office Message",
+    desc: "Set clear, professional out-of-office replies.",
+    fields: [
+      {id:"dates", label:"Dates you're away", type:"input", placeholder:"e.g. 14–21 July 2025"},
+      {id:"back", label:"When you're back", type:"input", placeholder:"e.g. Monday 22 July"},
+      {id:"contact", label:"Emergency contact (optional)", type:"input", placeholder:"e.g. sarah@company.com"}
+    ],
+    prompt: (f) => `Write a professional out-of-office reply. Away: ${f.dates}. Back: ${f.back}. Emergency contact: ${f.contact || "none"}. Write 2 versions: one formal, one casual.`
+  }
+};
+
+function showPaywall() {
+  document.getElementById('paywall-overlay').classList.add('open');
+}
+
+function openTool(id) {
+  if (!unlocked) { showPaywall(); return; }
+  const tool = TOOLS[id];
+  if (!tool) return;
+  currentTool = id;
+  document.getElementById('modal-title').textContent = tool.title;
+  document.getElementById('modal-desc').textContent = tool.desc;
+  const fieldsEl = document.getElementById('modal-fields');
+  fieldsEl.innerHTML = '';
+  tool.fields.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'field-group';
+    let input = '';
+    if (f.type === 'select') {
+      input = `<select id="mf-${f.id}">${f.options.map(o=>`<option>${o}</option>`).join('')}</select>`;
+    } else if (f.type === 'textarea') {
+      input = `<textarea id="mf-${f.id}" rows="3" placeholder="${f.placeholder}"></textarea>`;
+    } else {
+      input = `<input type="text" id="mf-${f.id}" placeholder="${f.placeholder}">`;
+    }
+    div.innerHTML = `<label>${f.label}</label>${input}`;
+    fieldsEl.appendChild(div);
+  });
+  document.getElementById('modal-btn').textContent = 'Generate';
+  document.getElementById('modal-btn').disabled = false;
+  document.getElementById('modal-output').classList.remove('visible');
+  document.getElementById('tool-overlay').classList.add('open');
+}
+
+function closeTool() {
+  document.getElementById('tool-overlay').classList.remove('open');
+  currentTool = null;
+}
+
+function handleOverlayClick(e, id) {
+  if (e.target.id === id) {
+    document.getElementById(id).classList.remove('open');
+    if (id === 'tool-overlay') currentTool = null;
+  }
+}
+
+function checkPassword() {
+  const val = document.getElementById('pw-input').value.trim();
+  const err = document.getElementById('pw-error');
+  if (PASSWORDS.includes(val)) {
+    unlocked = true;
+    sessionStorage.setItem('cosmo_unlocked', 'true');
+    document.getElementById('paywall-overlay').classList.remove('open');
+    document.getElementById('pw-input').value = '';
+    err.style.display = 'none';
+    document.querySelectorAll('.lock-badge').forEach(el => el.remove());
+  } else {
+    err.style.display = 'block';
+  }
+}
+
+async function runTool() {
+  if (!currentTool) return;
+  const tool = TOOLS[currentTool];
+  const values = {};
+  tool.fields.forEach(f => {
+    const el = document.getElementById(`mf-${f.id}`);
+    values[f.id] = el ? el.value.trim() : '';
+  });
+  const prompt = tool.prompt(values);
+  const btn = document.getElementById('modal-btn');
+  const output = document.getElementById('modal-output');
+  const outbox = document.getElementById('modal-outbox');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Generating...';
+  output.classList.add('visible');
+  outbox.classList.add('loading');
+  outbox.textContent = 'Writing your content...';
+  try {
+    const res = await fetch('/.netlify/functions/gemini', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+const text = data.text || "Something went wrong. Please try again.";
+    outbox.classList.remove('loading');
+    outbox.textContent = text;
+  } catch (err) {
+    outbox.classList.remove('loading');
+    outbox.textContent = 'Error connecting. Please try again.';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Generate Again';
+}
+
+async function copyModal() {
+  const text = document.getElementById('modal-outbox').textContent;
+  await navigator.clipboard.writeText(text);
+  const btn = document.querySelector('.copy-btn');
+  btn.textContent = '✓ Copied!';
+  setTimeout(() => btn.textContent = 'Copy to clipboard', 2000);
+}
+
+if (unlocked) {
+  document.querySelectorAll('.lock-badge').forEach(el => el.remove());
+}
+</script>
+</body>
+</html>
